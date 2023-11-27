@@ -28,8 +28,8 @@ const AddTask = () => {
           <form onSubmit={handleSubmitNewtodo}>
             <h3 className="font-bold text-lg">Add new task</h3>
             <div className="modal-action">
-            <input onChange={e => setNewTaskValue(e.target.value)} type="text" placeholder="Type here" className="input input-bordered w-full max-w-full" />
-            <button type="submit" className="btn">Add new task</button>
+            <input value={newTaskValue} onChange={e => setNewTaskValue(e.target.value)} type="text" placeholder="Type here" className="input input-bordered w-full" />
+            <button type="submit" className="btn">Submit</button>
             </div>
           </form>
         </Modal>

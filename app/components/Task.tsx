@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
-import { editTodo } from "@/api";
+import { deleteTodo, editTodo } from "@/api";
 
 interface TaskProps {
     task: ITask
@@ -14,7 +14,7 @@ interface TaskProps {
 const Task: React.FC<TaskProps> = ({task}) => {
   const router = useRouter()
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
-  const [openModalDeleted, setopenModaldeleted] = useState<boolean>(false);
+  const [openModalDeleted, setopenModalDeleted] = useState<boolean>(false);
   const [taskToEdit, setTaskToEdit] = useState<string>(task.text);
 
   const handleSubmitEdit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -23,8 +23,13 @@ const Task: React.FC<TaskProps> = ({task}) => {
       id: task.id,
       text: taskToEdit,
     });
-    setTaskToEdit('');
     setOpenModalEdit(false);
+    router.refresh();
+  }
+
+  const handleDeleteTask = async (id: string) => {
+    await deleteTodo(id);
+    setopenModalDeleted(false);
     router.refresh();
   }
 
@@ -42,7 +47,13 @@ const Task: React.FC<TaskProps> = ({task}) => {
             </div>
           </form>
         </Modal>
-          <FaRegTrashAlt cursor='pointer' className='text-red-500' size={22}/>
+          <FaRegTrashAlt onClick={() => setopenModalDeleted(true)} cursor='pointer' className='text-red-500' size={22}/>
+            <Modal modalOpen={openModalDeleted} setModalOpen={setopenModalDeleted}>
+              <h3 className="text-lg">Are you sure you want to delete this task?</h3>
+              <div className="modal-action justify-center">
+                <button onClick={() => handleDeleteTask(task.id)} className="btn">Yes</button>
+              </div>
+            </Modal>
           </td>
         </tr>
   )

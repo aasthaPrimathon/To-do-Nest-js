@@ -5,12 +5,15 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ modalOpen, setModalOpen, children }) => {
+  const closeModelHandler = () => {
+    setModalOpen(false);
+  }
   return (
     <div className={`modal ${modalOpen ? "modal-open" : ""}`} role="dialog">
   <div className="modal-box relative">
     {children}
     <div className="modal-action justify-center">
-      <label onClick={() => setModalOpen(false)} className="btn">Close!</label>
+      <label onClick={closeModelHandler} className="btn">Close!</label>
     </div>
   </div>
 </div>

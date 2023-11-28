@@ -7,11 +7,13 @@ import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import { deleteTodo, editTodo } from "@/api";
 
+
 interface TaskProps {
-    task: ITask
+    task: ITask;
+    setAllTasks: (value: ITask[]) => void;
 }
 
-const Task: React.FC<TaskProps> = ({task}) => {
+const Task: React.FC<TaskProps> = ({task, setAllTasks}) => {
   const router = useRouter()
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
   const [openModalDeleted, setopenModalDeleted] = useState<boolean>(false);
@@ -22,13 +24,20 @@ const Task: React.FC<TaskProps> = ({task}) => {
     await editTodo({
       id: task.id,
       text: taskToEdit,
-    });
+    }).then((res) => {
+      console.log('edit response:', res);
+      setAllTasks((prevTasks: ITask[]) => prevTasks.filter(todoTask => {todoTask.id !== task.id}));
+      setAllTasks((prevTasks: ITask[]) => [...prevTasks, res]);
+    }).catch((err) => {
+      console.error(err);
+    })
     setOpenModalEdit(false);
     router.refresh();
   }
 
   const handleDeleteTask = async (id: string) => {
     await deleteTodo(id);
+    setAllTasks((prevTasks: ITask[]) => {prevTasks.filter((task) => { return task.id !== id})});
     setopenModalDeleted(false);
     router.refresh();
   }

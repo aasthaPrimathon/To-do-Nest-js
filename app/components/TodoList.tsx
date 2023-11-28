@@ -1,12 +1,15 @@
 import { ITask } from "@/types/tasks"
-import React from "react"
+import React, { Dispatch, SetStateAction } from "react"
 import Task from "./Task"
 
 interface TodoListProps {
-  tasks: ITask[]
+  tasks: ITask[];
+  setAllTasks: (value: ITask[]) => void;
 }
 
-const TodoList: React.FC<TodoListProps> = ({tasks}) => {
+const TodoList = (props: TodoListProps) => {
+  const {tasks, setAllTasks} = props;
+  const isTodoExist = tasks?.length > 0;
   return (
     <div className="overflow-x-auto">
   <table className="table">
@@ -18,8 +21,8 @@ const TodoList: React.FC<TodoListProps> = ({tasks}) => {
       </tr>
     </thead>
     <tbody>
-      {tasks.length>0 && tasks.map((task) => (
-        <Task key={task.id} task={task}/>
+      {isTodoExist && tasks.map((task) => (
+        <Task key={task.id} task={task} setAllTasks={setAllTasks}/>
       ))}
     </tbody>
   </table>
@@ -27,4 +30,4 @@ const TodoList: React.FC<TodoListProps> = ({tasks}) => {
   )
 }
 
-export default TodoList
+export default TodoList;

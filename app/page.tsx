@@ -4,22 +4,23 @@ import AddTask from "./components/AddTask"
 import TodoList from "./components/TodoList"
 import { ITask } from "../types/tasks";
 import { useEffect, useState } from "react";
-// import Todo from "./components/Todo";
 
 export default function Home() {
   const [allTasks, setAllTasks] = useState<ITask[]>([]);
   useEffect(() => {
-    fetchAllTodos();
-  }, [])
+    fetchData();
+  }, []);
 
-  const fetchAllTodos = async () => {
+  useEffect(() => {
+    fetchData();
+  }, [allTasks])
+
+  const fetchData = async () => {
     await getAllTodos().then((res) => {
       setAllTasks(res);
     }).catch((err) => {
-      console.error(err);
     });
   }
-  console.log(allTasks);
   return (
     <main className="max-w-4xl mx-auto mt-4">
       <div className="text-center my-5 flex flex-col gap-4">

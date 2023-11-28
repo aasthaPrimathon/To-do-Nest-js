@@ -2,23 +2,15 @@
   "tasks": [
     {
       "id": "1",
-      "text": "buy milk and oranges"
+      "text": "buy milk and orange"
     },
     {
       "id": "51d3d9f6-e7d4-4e4a-a70e-fa3105d0dffd",
-      "text": "Make to-do app"
-    },
-    {
-      "id": "bfdbf0eb-d9b5-41e8-8cac-e673ab6c4718",
-      "text": "dummy"
+      "text": "Make to-do app with nextJS"
     },
     {
       "id": "db7a895a-0fe7-4ef6-80a7-0dd4099b46c3",
       "text": "Buy Stationaries"
-    },
-    {
-      "id": "f963a311-b270-4345-abfc-30f1245eeb11",
-      "text": "Chips"
     }
   ]
 }

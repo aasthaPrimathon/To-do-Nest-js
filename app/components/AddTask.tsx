@@ -39,14 +39,6 @@ const AddTask = (props: AddTaskProps) => {
     catch(err) {
       console.error(err);
     }
-    // await addTodo({
-    //   id: uuidv4(),
-    //   text: newTaskValue,
-    // }).then((res) => {
-    //   setAllTasks((prevTasks: ITask[]) => [...prevTasks, res]);
-    // }).catch((err) => {
-    //   console.error(err);
-    // });
 
     setNewTaskValue('');
     setIsModalOpen(false);

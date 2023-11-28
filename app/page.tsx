@@ -17,7 +17,8 @@ export default function Home() {
     try {
       const res = await getAllTodos();
       setAllTasks(res);
-    } catch (err) {
+    } 
+    catch (err) {
       console.error(err);
     }
   }

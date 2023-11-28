@@ -12,10 +12,9 @@ interface AddTaskProps {
 }
 
 const AddTask = (props: AddTaskProps) => {
+  const {allTasks, setAllTasks} = props;
 
   const inputAddRef = useRef<HTMLInputElement>(null);
-
-  const {allTasks, setAllTasks} = props;
 
   const router = useRouter();
 
@@ -29,14 +28,26 @@ const AddTask = (props: AddTaskProps) => {
   
   const handleSubmitNewtodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo({
-      id: uuidv4(),
-      text: newTaskValue,
-    }).then((res) => {
+    try {
+      const res = await addTodo({
+        id: uuidv4(),
+        text: newTaskValue,
+      });
+
       setAllTasks((prevTasks: ITask[]) => [...prevTasks, res]);
-    }).catch((err) => {
+    }
+    catch(err) {
       console.error(err);
-    });
+    }
+    // await addTodo({
+    //   id: uuidv4(),
+    //   text: newTaskValue,
+    // }).then((res) => {
+    //   setAllTasks((prevTasks: ITask[]) => [...prevTasks, res]);
+    // }).catch((err) => {
+    //   console.error(err);
+    // });
+
     setNewTaskValue('');
     setIsModalOpen(false);
   }

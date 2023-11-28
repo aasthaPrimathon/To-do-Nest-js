@@ -1,5 +1,4 @@
 "use client"
-
 import { ITask } from "@/types/tasks"
 import Modal from "./Modal";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
@@ -14,10 +13,9 @@ interface TaskProps {
 }
 
 const Task = (props: TaskProps) => {
-  
-  const inputEditRef = useRef<HTMLInputElement>(null);
-
   const {task, setAllTasks} =  props;
+
+  const inputEditRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
 
@@ -32,7 +30,9 @@ const Task = (props: TaskProps) => {
         id: task.id,
         text: taskToEdit,
       });
+
       const { id, text } = res || {};
+
       setAllTasks((prevTaskList) => {
         const updatedData = prevTaskList.map((ele) => {
           if (ele.id === id) {
@@ -41,11 +41,12 @@ const Task = (props: TaskProps) => {
           return ele;
         })
         return updatedData;
-      })
+      });
     }
     catch(err) {
       console.error(err);
     } 
+
     setOpenModalEdit(false);
   }
 
@@ -56,6 +57,7 @@ const Task = (props: TaskProps) => {
     catch(err) {
       console.error(err);
     }
+
     setAllTasks((prevTasks: ITask[]) => {const deletedArr = prevTasks.filter((task) => {return task.id !== id}); return deletedArr});
     setopenModalDeleted(false);
   }
@@ -95,4 +97,4 @@ const Task = (props: TaskProps) => {
   )
 }
 
-export default Task
+export default Task;

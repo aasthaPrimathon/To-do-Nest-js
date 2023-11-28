@@ -8,7 +8,6 @@ interface TodoListProps {
 }
 
 const TodoList = (props: TodoListProps) => {
-  
   const {tasks, setAllTasks} = props;
 
   const isTodoExist = tasks.length > 0;

@@ -5,7 +5,6 @@ interface ModalProps {
 }
 
 const Modal = (props: ModalProps) => {
-
   const { modalOpen, setModalOpen, children } = props;
 
   const closeModelHandler = () => {
@@ -24,4 +23,4 @@ const Modal = (props: ModalProps) => {
   )
 }
 
-export default Modal
+export default Modal;

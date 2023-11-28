@@ -8,9 +8,10 @@ interface TodoListProps {
 }
 
 const TodoList = (props: TodoListProps) => {
+  
   const {tasks, setAllTasks} = props;
+
   const isTodoExist = tasks.length > 0;
-  console.log("🚀 ~ file: TodoList.tsx:13 ~ TodoList ~ isTodoExist:", isTodoExist);
 
   return (
     <div className="overflow-x-auto">

@@ -4,10 +4,14 @@ interface ModalProps {
     children: React.ReactNode
 }
 
-const Modal: React.FC<ModalProps> = ({ modalOpen, setModalOpen, children }) => {
+const Modal = (props: ModalProps) => {
+
+  const { modalOpen, setModalOpen, children } = props;
+
   const closeModelHandler = () => {
     setModalOpen(false);
   }
+
   return (
     <div className={`modal ${modalOpen ? "modal-open" : ""}`} role="dialog">
   <div className="modal-box relative">

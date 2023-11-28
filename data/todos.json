@@ -1,16 +1,20 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "text": "buy milk and orange"
-    },
-    {
       "id": "51d3d9f6-e7d4-4e4a-a70e-fa3105d0dffd",
-      "text": "Make to-do app with nextJS"
+      "text": "Make to-do app in nextJS"
     },
     {
       "id": "db7a895a-0fe7-4ef6-80a7-0dd4099b46c3",
-      "text": "Buy Stationaries"
+      "text": "Buy Stationaries and coffee"
+    },
+    {
+      "id": "76740e29-d7c7-4014-a898-547d72767b2b",
+      "text": "Go to office primathon"
+    },
+    {
+      "id": "7b7d24ff-a5b8-476b-823b-d2bc75d0cd97",
+      "text": "dummy"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { ITask } from "@/types/tasks"
-import React, { Dispatch, SetStateAction } from "react"
+import React from "react"
 import Task from "./Task"
 
 interface TodoListProps {
@@ -9,7 +9,9 @@ interface TodoListProps {
 
 const TodoList = (props: TodoListProps) => {
   const {tasks, setAllTasks} = props;
-  const isTodoExist = tasks?.length > 0;
+  const isTodoExist = tasks.length > 0;
+  console.log("🚀 ~ file: TodoList.tsx:13 ~ TodoList ~ isTodoExist:", isTodoExist);
+
   return (
     <div className="overflow-x-auto">
   <table className="table">

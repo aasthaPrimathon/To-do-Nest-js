@@ -60,4 +60,4 @@ const AddTask = (props: AddTaskProps) => {
   )
 }
 
-export default AddTask
+export default AddTask;

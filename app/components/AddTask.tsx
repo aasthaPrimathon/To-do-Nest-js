@@ -44,6 +44,10 @@ const AddTask = (props: AddTaskProps) => {
     setIsModalOpen(false);
   }
 
+  const setNewtaskHandler = (e) => {
+    setNewTaskValue(e.target.value);
+  }
+
   return (
     <div>
         <button onClick={addTaskHandler} className='btn btn-primary w-full'>Add new task <FaPlus className='ml-2' size={18}/></button>
@@ -51,7 +55,7 @@ const AddTask = (props: AddTaskProps) => {
           <form onSubmit={handleSubmitNewtodo}>
             <h3 className="font-bold text-lg">Add new task</h3>
             <div className="modal-action">
-            <input ref={inputAddRef} value={newTaskValue} onChange={e => setNewTaskValue(e.target.value)} type="text" placeholder="Type here" className="input input-bordered w-full" />
+            <input ref={inputAddRef} value={newTaskValue} onChange={setNewtaskHandler} type="text" placeholder="Type here" className="input input-bordered w-full" />
             <button type="submit" className="btn">Submit</button>
             </div>
           </form>

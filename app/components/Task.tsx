@@ -50,15 +50,15 @@ const Task = (props: TaskProps) => {
     setOpenModalEdit(false);
   }
 
-  const handleDeleteTask = async (id: string) => {
+  const handleDeleteTask = (id: string) => async () => {
     try {
       await deleteTodo(id);
+      setAllTasks((prevTasks: ITask[]) => {const deletedArr = prevTasks.filter((task) => {return task.id !== id}); return deletedArr});
     }
     catch(err) {
       console.error(err);
     }
-
-    setAllTasks((prevTasks: ITask[]) => {const deletedArr = prevTasks.filter((task) => {return task.id !== id}); return deletedArr});
+    
     setopenModalDeleted(false);
   }
 
@@ -71,6 +71,10 @@ const Task = (props: TaskProps) => {
     setopenModalDeleted(true);
   }
 
+  const editTaskHandler = (e) => {
+    setTaskToEdit(e.target.value);
+  }
+
   return (
         <tr key={task.id}>
           <td>{task.text}</td>
@@ -80,7 +84,7 @@ const Task = (props: TaskProps) => {
           <form onSubmit={handleSubmitEdit}>
             <h3 className="font-bold text-lg">Edit task</h3>
             <div className="modal-action">
-            <input ref={inputEditRef} value={taskToEdit} onChange={e => setTaskToEdit(e.target.value)} type="text" placeholder="Type here" className="input input-bordered w-full" />
+            <input ref={inputEditRef} value={taskToEdit} onChange={editTaskHandler} type="text" placeholder="Type here" className="input input-bordered w-full" />
             <button type="submit" className="btn">Submit</button>
             </div>
           </form>
@@ -89,7 +93,7 @@ const Task = (props: TaskProps) => {
             <Modal modalOpen={openModalDeleted} setModalOpen={setopenModalDeleted}>
               <h3 className="text-lg">Are you sure you want to delete this task?</h3>
               <div className="modal-action justify-center">
-                <button onClick={() => handleDeleteTask(task.id)} className="btn">Yes</button>
+                <button onClick={handleDeleteTask(task.id)} className="btn">Yes</button>
               </div>
             </Modal>
           </td>

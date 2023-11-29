@@ -1,24 +1,24 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "text": "buy milk and oranges"
-    },
-    {
-      "id": "3",
-      "text": "Buy stationaries and milk"
-    },
-    {
-      "id": "4",
-      "text": "Go to gym"
-    },
-    {
-      "id": "299b5336-336d-4671-8cb8-48706ad084fa",
-      "text": "Buy fruits and vergetables"
-    },
-    {
       "id": "51d3d9f6-e7d4-4e4a-a70e-fa3105d0dffd",
-      "text": "Make to-do app"
+      "text": "Make to-do app in nextJS"
+    },
+    {
+      "id": "db7a895a-0fe7-4ef6-80a7-0dd4099b46c3",
+      "text": "Buy Stationaries and coffee"
+    },
+    {
+      "id": "76740e29-d7c7-4014-a898-547d72767b2b",
+      "text": "Go to office"
+    },
+    {
+      "id": "32819b71-d883-4959-8452-c537e9bd8d01",
+      "text": "Buy milk and coffee"
+    },
+    {
+      "id": "f4fa233b-b303-4927-b134-df0114b4fcb5",
+      "text": "abcd"
     }
   ]
 }

@@ -1,34 +1,61 @@
-"use client";
 import { FaPlus } from "react-icons/fa6";
 import Modal from "./Modal";
-import { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useState,  useEffect, useRef  } from "react";
 import { addTodo } from "@/api";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from 'uuid';
+import { ITask } from "@/types/tasks";
 
-const AddTask = () => {
+interface AddTaskProps {
+  allTasks: ITask[];
+  setAllTasks: (value: ITask[]) => void;
+}
+
+const AddTask = (props: AddTaskProps) => {
+  const {allTasks, setAllTasks} = props;
+
+  const inputAddRef = useRef<HTMLInputElement>(null);
+
   const router = useRouter();
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [newTaskValue, setNewTaskValue] = useState<string>("");
+
+  const addTaskHandler = () => {
+    setIsModalOpen(true);
+    inputAddRef.current?.focus();
+  }
   
   const handleSubmitNewtodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo({
-      id: uuidv4(),
-      text: newTaskValue,
-    });
+    try {
+      const res = await addTodo({
+        id: uuidv4(),
+        text: newTaskValue,
+      });
+
+      setAllTasks((prevTasks: ITask[]) => [...prevTasks, res]);
+    }
+    catch(err) {
+      console.error(err);
+    }
+
     setNewTaskValue('');
-    setModalOpen(false);
-    router.refresh();
+    setIsModalOpen(false);
   }
+
+  const setNewtaskHandler = (e) => {
+    setNewTaskValue(e.target.value);
+  }
+
   return (
     <div>
-        <button onClick={() => setModalOpen(true)} className='btn btn-primary w-full'>Add new task <FaPlus className='ml-2' size={18}/></button>
-        <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
+        <button onClick={addTaskHandler} className='btn btn-primary w-full'>Add new task <FaPlus className='ml-2' size={18}/></button>
+        <Modal modalOpen={isModalOpen} setModalOpen={setIsModalOpen}>
           <form onSubmit={handleSubmitNewtodo}>
             <h3 className="font-bold text-lg">Add new task</h3>
             <div className="modal-action">
-            <input value={newTaskValue} onChange={e => setNewTaskValue(e.target.value)} type="text" placeholder="Type here" className="input input-bordered w-full" />
+            <input ref={inputAddRef} value={newTaskValue} onChange={setNewtaskHandler} type="text" placeholder="Type here" className="input input-bordered w-full" />
             <button type="submit" className="btn">Submit</button>
             </div>
           </form>
@@ -37,4 +64,4 @@ const AddTask = () => {
   )
 }
 
-export default AddTask
+export default AddTask;
